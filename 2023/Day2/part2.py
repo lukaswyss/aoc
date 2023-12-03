@@ -35,3 +35,4 @@ for line in lines:
     powers.append(MinumumCubes[0] * MinumumCubes[1] * MinumumCubes[2])
 
 print(sum(powers))
+
