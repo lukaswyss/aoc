@@ -7,24 +7,22 @@ with open(current_directory + '/2023/Day3/text.txt', 'r', encoding='utf-8') as f
     input = f.readlines()
 
 lines = []
-partNumbers = []
-currentLineId = -1
-
 for x in input:
     x = "." + x[:-1] + "."
     lines.append(x)
-
-len = len(lines) -1
+partNumbers = []
+currentLineId = -1
+len = len(lines)
 
 def getPrevious(LineId):
-    previousLine = ""
+    previousLine = "...."
     if LineId > 0:
         previousLine = lines[LineId - 1]
     return previousLine
 
 def getNext(LineId):
-    nextLine = ""
-    if LineId < len:
+    nextLine = "...."
+    if LineId < len -1:
         nextLine = lines[LineId + 1]
     return nextLine
 
@@ -33,7 +31,7 @@ for line in lines:
     currentLineId += 1
     previousLine = getPrevious(currentLineId)
     nextLine = getNext(currentLineId)
-    n = re.findall(r"\d+", line)
+    n = re.findall(r'\d+', line)
     numbers = []    
     for number in n:
         num = int(number)
@@ -52,7 +50,10 @@ for line in lines:
         isValid = False
         isNeg = False
         p = previousLine[number[1]-1:number[1]+number[2]+1]
-        n = nextLine[number[1]-1:number[1]+number[2]+1]
+        n =     nextLine[number[1]-1:number[1]+number[2]+1]
+        x = line[number[1]-1:number[1]+number[2]]
+        y = line[number[1]-1:number[1]+number[2]+ 1]
+        
         for char in p:
             if char != ".":
                 isValid = True
@@ -61,11 +62,14 @@ for line in lines:
                 isValid = True
         if line[number[1]-1] != "." or line[number[1] + number[2]] != ".":
             isValid = True
-        if line[number[1]-1] == "-":
-            isNeg = True
-        if isValid and not isNeg:
+        if isValid:
             partNumbers.append(int(number[0]))
-        elif isValid and isNeg:
-            partNumbers.append(int(number[0]))
+
+        # print(p)
+        # print(line[number[1]-1:number[1]+number[2]+ 1])
+        # print(n)
+        # print(isValid)
+        #elif isValid and isNeg:
+            #partNumbers.append(-int(number[0]))
 
 print(sum(partNumbers))
