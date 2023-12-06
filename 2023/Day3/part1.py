@@ -1,9 +1,6 @@
 import os
 import re
-
-current_directory = os.getcwd()
-
-with open(current_directory + '/2023/Day3/text.txt', 'r', encoding='utf-8') as f:
+with open(os.getcwd() + '/aoc/2023/Day4/text.txt', 'r', encoding='utf-8') as f:
     input = f.readlines()
 
 lines = []
@@ -32,27 +29,16 @@ for line in lines:
     previousLine = getPrevious(currentLineId)
     nextLine = getNext(currentLineId)
     n = re.findall(r'\d+', line)
-    numbers = []    
+    numbers = []
     for number in n:
-        num = int(number)
-        numberlength = 1
-        if num >= 10:
-            numberlength = 2
-        if num >= 100:
-            numberlength = 3
-        if num >= 1000:
-            numberlength = 4
-        if num >= 10000:
-            numberlength = 5
-        numbers.append((number, line.index(number), numberlength))  # Updated line
+        x = len(number)
+        numbers.append((number, line.index(number), x))  # Updated line
 
     for number in numbers:
         isValid = False
         isNeg = False
         p = previousLine[number[1]-1:number[1]+number[2]+1]
         n =     nextLine[number[1]-1:number[1]+number[2]+1]
-        x = line[number[1]-1:number[1]+number[2]]
-        y = line[number[1]-1:number[1]+number[2]+ 1]
         
         for char in p:
             if char != ".":
