@@ -12,6 +12,11 @@ for x in input:
 sortedHands = [] 
 totalwinnings = 0
 
+def convertToNumber(cardString):
+    value = ""
+    for char in cardString:
+        value += str(cards.index(char) + 10)  
+    return int(value) 
 
 def getType(hand):
     counts = [hand.count(card) for card in hand]
@@ -28,19 +33,21 @@ def getType(hand):
     if 2 in counts:
         return 6
     return 7
-    
 
+handsToAdd = [[], [], [], [], [], [], []]
 
 for hand in hands:
     type = getType(hand[0])
-    if not sortedHands:
-        sortedHands.append([hand[0], hand[1], type])
-    else:
-        for sortedHand in sortedHands:
-            if type == sortedHand[2]:
-                sortedHand.insert(1, [hand[0], hand[1], type])
-            if type 
+    hand.append(convertToNumber(hand[0]))
+    handsToAdd[type-1].append(hand)
+        
+for hands in handsToAdd:
+    hands.sort(key=lambda x:x[2])
+    for hand in hands:
+        sortedHands.append(hand)
 
+sortedHands.reverse()
 for hand in sortedHands:
-    totalwinnings += hand[1] * hand[2]
+    val = (sortedHands.index(hand) + 1)
+    totalwinnings += val * hand[1]
 print(totalwinnings)
