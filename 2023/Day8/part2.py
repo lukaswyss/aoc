@@ -35,5 +35,5 @@ for current in currents:
         steps.append[x]
 
 
-result = kgve(steps)s
+result = kgve(steps)
 print(result)
