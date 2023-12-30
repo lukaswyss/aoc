@@ -31,5 +31,6 @@ for staringLine in startingLines:
             steps += 1
     simultaneousSteps.append(steps)
 
-result = kgve(simultaneousSteps)
+
+result = kgve(steps)
 print(result)
